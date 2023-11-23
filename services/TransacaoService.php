@@ -9,18 +9,40 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TransacaoService
 {
+    const TAXA_DEBITO = 0.03;
+    const TAXA_CREDITO = 0.05;
+    const TAXA_PIX = 0;
+
     public function executa($conta_id, $valor, $forma_pagamento)
     {
         $conta = Conta::find($conta_id);
 
-        if (!$conta) return 'conta nao encontrada';
+        if (!$conta) throw new NotFoundHttpException('Conta inválida');
 
         $valor = $this->aplicaTaxa($valor, $forma_pagamento);
 
-        if ($conta->saldo < $valor) return 'saldo insuficiente';
+        if ($conta->saldo < $valor) throw new NotFoundHttpException('Saldo insuficiente');
+
+        $conta->update(['saldo' => $conta->saldo - $valor]);
+        return $conta;
     }
 
     private function aplicaTaxa($valor, $forma_pagamento)
     {
+        switch ($forma_pagamento) {
+            case 'D':
+                $valor += $valor * self::TAXA_DEBITO;
+                break;
+            case 'C':
+                $valor += $valor * self::TAXA_CREDITO;
+                break;
+            case 'P':
+                $valor += $valor * self::TAXA_PIX;
+                break;
+            default:
+                throw new NotFoundHttpException('Tipo de transação inválida');
+        }
+
+        return $valor;
     }
 }

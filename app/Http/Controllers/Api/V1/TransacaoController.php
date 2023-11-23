@@ -18,6 +18,7 @@ class TransacaoController extends Controller
     public function transacao(Request $request)
     {
         $response = $this->transacaoService->executa($request->input('conta_id'), $request->input('valor'), $request->input('forma_pagamento'));
+
         return response($response);
     }
 }

@@ -28,4 +28,6 @@ class Conta extends Model
      * @var bool
      */
     public $incrementing = true;
+
+    protected $fillable = ['saldo'];
 }
