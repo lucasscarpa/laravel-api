@@ -2,48 +2,33 @@
 
 namespace Services\Transacao;
 
-use App\Conta;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Services\Transacao\TransacaoDebito;
+use Services\Transacao\TransacaoCredito;
+use Services\Transacao\TransacaoPix;
 use App\DTO\Transacao\InputModel;
-
+use App\Conta;
 
 class TransacaoService
 {
-    const TAXA_DEBITO = 0.03;
-    const TAXA_CREDITO = 0.05;
-    const TAXA_PIX = 0;
+    protected $conta;
 
-    public function executa(InputModel $input)
+    public function __construct(Conta $conta)
     {
-        $conta = Conta::find($input->conta_id);
-
-        if (!$conta) abort(404, 'Conta inválida');
-
-        $valor = $this->aplicaTaxa($input->valor, $input->forma_pagamento);
-
-        if ($conta->saldo < $valor) throw new NotFoundHttpException('Saldo insuficiente');
-
-        $conta->update(['saldo' => $conta->saldo - $valor]);
-        return $conta;
+        $this->conta = $conta;
     }
 
-    private function aplicaTaxa($valor, $forma_pagamento)
+    public function criarTransacao($forma_pagamento, $valor)
     {
         switch ($forma_pagamento) {
-            case 'D':
-                $valor += $valor * self::TAXA_DEBITO;
-                break;
             case 'C':
-                $valor += $valor * self::TAXA_CREDITO;
-                break;
+                return new TransacaoCredito($this->conta, $valor);
+            case 'D':
+                return new TransacaoDebito($this->conta, $valor);
             case 'P':
-                $valor += $valor * self::TAXA_PIX;
-                break;
+                return new TransacaoPix($this->conta, $valor);
             default:
-                throw new NotFoundHttpException('Tipo de transação inválida');
+                // Lidar com um tipo de transação desconhecido, se necessário
+                return null;
         }
-
-        return $valor;
     }
 }
