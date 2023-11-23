@@ -6,6 +6,7 @@ use App\Conta;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+
 class TransacaoService
 {
     public function executa($conta_id, $valor, $forma_pagamento)
