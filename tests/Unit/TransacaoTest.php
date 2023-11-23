@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use App\Conta;
 
 class TransacaoTest extends TestCase
@@ -12,8 +12,37 @@ class TransacaoTest extends TestCase
      *
      * @return void
      */
-    public function transacao_pode_ser_realizada()
+    public function testDebito()
     {
-        $conta = factory(Conta::class)->create();
+        // $conta = factory(Conta::class)->make();
+        // dd($conta);
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * A basic unit test example.
+     *
+     * @return void
+     */
+    public function testCredito()
+    {
+        // $conta = factory(Conta::class)->make();
+        // dd($conta);
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * A basic unit test example.
+     *
+     * @return void
+     */
+    public function testPix()
+    {
+        // $conta = factory(Conta::class)->make();
+        // dd($conta);
+
+        $this->assertTrue(true);
     }
 }

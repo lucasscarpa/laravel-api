@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Conta extends Model
 {
+    protected $connection = 'sqlite';
 
     /**
      * The table associated with the model.
