@@ -14,9 +14,6 @@ class TransacaoTest extends TestCase
      */
     public function testDebito()
     {
-        // $conta = factory(Conta::class)->make();
-        // dd($conta);
-
         $this->assertTrue(true);
     }
 
@@ -27,9 +24,6 @@ class TransacaoTest extends TestCase
      */
     public function testCredito()
     {
-        // $conta = factory(Conta::class)->make();
-        // dd($conta);
-
         $this->assertTrue(true);
     }
 
@@ -40,9 +34,6 @@ class TransacaoTest extends TestCase
      */
     public function testPix()
     {
-        // $conta = factory(Conta::class)->make();
-        // dd($conta);
-
         $this->assertTrue(true);
     }
 }
