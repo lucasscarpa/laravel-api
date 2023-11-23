@@ -1,11 +1,11 @@
 <?php
 
-namespace Services;
+namespace Services\Transacao;
 
 use App\Conta;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\DTO\TransacaoDTO;
+use App\DTO\Transacao\InputModel;
 
 
 class TransacaoService
@@ -14,13 +14,13 @@ class TransacaoService
     const TAXA_CREDITO = 0.05;
     const TAXA_PIX = 0;
 
-    public function executa(TransacaoDTO $transacaoDTO)
+    public function executa(InputModel $input)
     {
-        $conta = Conta::find($transacaoDTO->conta_id);
+        $conta = Conta::find($input->conta_id);
 
         if (!$conta) abort(404, 'Conta inválida');
 
-        $valor = $this->aplicaTaxa($transacaoDTO->valor, $transacaoDTO->forma_pagamento);
+        $valor = $this->aplicaTaxa($input->valor, $input->forma_pagamento);
 
         if ($conta->saldo < $valor) throw new NotFoundHttpException('Saldo insuficiente');
 

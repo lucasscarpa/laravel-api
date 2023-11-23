@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DTO;
+namespace App\DTO\Transacao;
 
-class TransacaoDTO
+class InputModel
 {
     public float $valor;
     public int $conta_id;
