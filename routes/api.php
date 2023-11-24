@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\V1\ContaController;
 
 $router->group(['prefix' => '/conta'], function ($router) {
     $router->get('/', 'Api\V1\ContaController@index');
-    $router->post('/', 'Api\V1\ContaController@novaConta');
+    $router->post('/', 'Api\V1\ContaController@create');
 });
 
 $router->group(['prefix' => '/transacao'], function ($router) {

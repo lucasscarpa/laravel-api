@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\BuscaContaFormRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\DTO\ContaDTO;
 
 class ContaController extends Controller
 {
@@ -18,5 +19,11 @@ class ContaController extends Controller
         if (!$request->input('id')) throw new NotFoundHttpException('Conta inexistente');
 
         return response()->json(['conta_id' => 12345, 'saldo' => 0.50]);
+    }
+
+    public function create(Request $request)
+    {
+        $dto = new ContaDTO($request->input('valor', -1));
+        dd($dto);
     }
 }

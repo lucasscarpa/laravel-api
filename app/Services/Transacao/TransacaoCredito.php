@@ -1,10 +1,10 @@
 <?php
 
-namespace Services\Transacao;
+namespace App\Services\Transacao;
 
-use Services\Transacao\interfaces\Transacao;
+use App\Services\Transacao\interfaces\Transacao;
 
-class TransacaoPix implements Transacao
+class TransacaoCredito implements Transacao
 {
     protected $valor;
 
@@ -15,6 +15,6 @@ class TransacaoPix implements Transacao
 
     public function calcularTaxa()
     {
-        return $this->valor;
+        return $this->valor * 0.05;
     }
 }

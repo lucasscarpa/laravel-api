@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Services\Transacao\TransacaoService;
-use App\DTO\Transacao\InputModel;
+use App\Services\Transacao\TransacaoService;
+use App\DTO\TransacaoDTO;
 
 class TransacaoController extends Controller
 {
@@ -18,13 +18,13 @@ class TransacaoController extends Controller
 
     public function transacao(Request $request)
     {
-        $transacaoInputModel = new InputModel(
+        $TransacaoDTO = new TransacaoDTO(
             $request->input('valor'),
             $request->input('conta_id'),
             $request->input('forma_pagamento')
         );
-
-        $response = $this->transacaoService->executa($transacaoInputModel);
+        dd($TransacaoDTO);
+        $response = $this->transacaoService->executa($TransacaoDTO);
 
         return response($response);
     }

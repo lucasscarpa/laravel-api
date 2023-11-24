@@ -1,6 +1,6 @@
 <?php
 
-namespace Services\Transacao\interfaces;
+namespace App\Services\Transacao\interfaces;
 
 interface Transacao
 {

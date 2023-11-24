@@ -1,6 +1,6 @@
 <?php
 
-namespace Services\Transacao;
+namespace App\Services\Transacao;
 
 use App\Conta;
 use Illuminate\Http\Exceptions\HttpResponseException;

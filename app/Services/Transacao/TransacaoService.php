@@ -1,10 +1,10 @@
 <?php
 
-namespace Services\Transacao;
+namespace App\Services\Transacao;
 
-use Services\Transacao\TransacaoDebito;
-use Services\Transacao\TransacaoCredito;
-use Services\Transacao\TransacaoPix;
+use App\Services\Transacao\TransacaoDebito;
+use App\Services\Transacao\TransacaoCredito;
+use App\Services\Transacao\TransacaoPix;
 use App\DTO\Transacao\InputModel;
 use App\Conta;
 

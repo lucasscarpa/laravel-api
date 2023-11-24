@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DTO\Transacao;
+namespace App\DTO;
 
-class InputModel
+class TransacaoDTO extends AbstractDTO
 {
     public float $valor;
     public int $conta_id;
