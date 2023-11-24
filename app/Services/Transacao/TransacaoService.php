@@ -27,7 +27,6 @@ class TransacaoService
             case 'P':
                 return new TransacaoPix($this->conta, $valor);
             default:
-                // Lidar com um tipo de transação desconhecido, se necessário
                 return null;
         }
     }

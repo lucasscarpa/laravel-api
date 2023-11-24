@@ -6,31 +6,37 @@ use Illuminate\Contracts\Validation\Validator;
 
 class ContaDTO extends AbstractDTO implements InterfaceDTO
 {
-    public float $valor;
+    public $saldo;
 
-    public function __construct(float $valor)
+    public function __construct($saldo)
     {
-        $this->valor = $valor;
+        $this->saldo = $saldo;
         $this->validate();
     }
 
-    public function rules():array {
+    public function rules(): array
+    {
         return [
-            'valor' => 'required|min:1|max:1000000000'
+            'saldo' => 'required|numeric|gt:0'
         ];
     }
 
-    public function messages():array {
+    public function messages(): array
+    {
         return [
-            'valor' => 'Voce precisa definir um valor inicial'
+            '*required' => 'É obrigatório informar um valor para :attribute',
+            'saldo.gt' => 'É obrigatório informar um saldo positivo'
+
         ];
     }
 
-    public function validator():Validator {
+    public function validator(): Validator
+    {
         return validator($this->toArray(), $this->rules(), $this->messages());
     }
 
-    public function validate() {
+    public function validate()
+    {
         return $this->validator()->validate();
     }
 }

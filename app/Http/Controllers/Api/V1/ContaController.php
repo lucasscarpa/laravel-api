@@ -4,26 +4,38 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\BuscaContaFormRequest;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\DTO\ContaDTO;
+use App\Services\Conta\ContaService;
+use App\Http\Requests\NovaContaRequest;
 
 class ContaController extends Controller
 {
-    public function __construct()
+    private $contaService;
+
+    public function __construct(ContaService $contaService)
     {
+        $this->contaService = $contaService;
     }
 
     public function index(Request $request)
     {
-        if (!$request->input('id')) throw new NotFoundHttpException('Conta inexistente');
-
         return response()->json(['conta_id' => 12345, 'saldo' => 0.50]);
     }
 
+    /**
+     * Cria uma nova conta
+     *
+     * @param  Request  $request
+     * @return Response
+     */
     public function create(Request $request)
     {
-        $dto = new ContaDTO($request->input('valor', -1));
-        dd($dto);
+        $ContaDTO = new ContaDTO(
+            $request->input('saldo')
+        );
+
+        $conta = $this->contaService->criaConta($ContaDTO);
+
+        return response()->json(['conta' => $conta]);
     }
 }
