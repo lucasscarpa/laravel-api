@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\Conta;
+use App\Models\Conta;
 
 class TransacaoTest extends TestCase
 {

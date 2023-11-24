@@ -1,14 +1,16 @@
 <?php
 
-namespace App\DTO;
+namespace App\DTO\Conta;
 
 use Illuminate\Contracts\Validation\Validator;
+use App\DTO\AbstractDTO;
+use App\DTO\InterfaceDTO;
 
 class ContaDTO extends AbstractDTO implements InterfaceDTO
 {
-    public $saldo;
+    public float $saldo;
 
-    public function __construct($saldo)
+    public function __construct(float $saldo)
     {
         $this->saldo = $saldo;
         $this->validate();

@@ -2,17 +2,34 @@
 
 namespace App\Services\Conta;
 
-use App\DTO\ContaDTO;
-use App\Conta;
+use App\DTO\Conta\ContaDTO;
+use App\Repositories\Conta\IContaRepository;
+use App\Models\Conta;
 
-class ContaService
+class ContaService implements IContaService
 {
-    public function criaConta(ContaDTO $contaDTO): Conta
-    {
-        $conta = new Conta();
-        $conta->saldo = $contaDTO->saldo;
-        $conta->save();
+    private $contaRepository;
 
-        return $conta;
+    public function __construct(IContaRepository $contaRepository)
+    {
+        $this->contaRepository = $contaRepository;
+    }
+
+    public function getContaById(int $id)
+    {
+        return $this->contaRepository->find($id);
+    }
+
+    public function createConta(ContaDTO $contaDTO)
+    {
+        return $this->contaRepository->create([
+            'saldo' => $contaDTO->saldo,
+        ]);
+    }
+
+    public function deleteConta(int $id)
+    {
+        $conta = $this->contaRepository->find($id);
+        $conta->delete();
     }
 }

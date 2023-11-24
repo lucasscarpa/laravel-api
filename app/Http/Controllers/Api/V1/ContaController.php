@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\DTO\ContaDTO;
+use App\DTO\Conta\ContaDTO;
 use App\Services\Conta\ContaService;
+use App\Http\Resources\ContaResource;
 use App\Http\Requests\NovaContaRequest;
 
 class ContaController extends Controller
@@ -19,7 +20,11 @@ class ContaController extends Controller
 
     public function index(Request $request)
     {
-        return response()->json(['conta_id' => 12345, 'saldo' => 0.50]);
+        $conta = $this->contaService->getContaById($request->input('id', 0));
+
+        if (!$conta) return response()->json(['Conta não encontrada'], 404);
+
+        return new ContaResource($conta);
     }
 
     /**
@@ -34,8 +39,8 @@ class ContaController extends Controller
             $request->input('saldo')
         );
 
-        $conta = $this->contaService->criaConta($ContaDTO);
+        $conta = $this->contaService->createConta($ContaDTO);
 
-        return response()->json(['conta' => $conta]);
+        return new ContaResource($conta);
     }
 }

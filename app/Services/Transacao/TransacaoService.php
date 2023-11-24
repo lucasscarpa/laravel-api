@@ -6,7 +6,7 @@ use App\Services\Transacao\TransacaoDebito;
 use App\Services\Transacao\TransacaoCredito;
 use App\Services\Transacao\TransacaoPix;
 use App\DTO\Transacao\InputModel;
-use App\Conta;
+use App\Models\Conta;
 
 class TransacaoService
 {

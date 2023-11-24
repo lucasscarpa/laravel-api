@@ -2,7 +2,7 @@
 
 namespace App\Services\Transacao;
 
-use App\Conta;
+use App\Models\Conta;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\DTO\Transacao\InputModel;

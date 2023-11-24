@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Conta;
+use App\Models\Conta;
 
 class ContaSeeder extends Seeder
 {
@@ -13,6 +13,6 @@ class ContaSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Conta::class, 5)->create();
+        factory(App\Models\Conta::class, 5)->create();
     }
 }
