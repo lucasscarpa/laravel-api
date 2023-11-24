@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DTO\Conta\ContaDTO;
 use App\Services\Conta\ContaService;
-use App\Http\Resources\ContaResource;
-use App\Http\Requests\NovaContaRequest;
 
 class ContaController extends Controller
 {
@@ -18,20 +16,30 @@ class ContaController extends Controller
         $this->contaService = $contaService;
     }
 
+    /**
+     * Busca Conta por ID
+     *
+     * @param  Request  $request
+     * @return ContaDTO
+     */
     public function index(Request $request)
     {
         $conta = $this->contaService->getContaById($request->input('id', 0));
 
-        if (!$conta) return response()->json(['Conta não encontrada'], 404);
+        if (!$conta) return response()->json(['message' => 'Conta não encontrada'], 404);
 
-        return new ContaResource($conta);
+        $contaDTO = new ContaDTO(
+            $conta->saldo
+        );
+
+        return $contaDTO;
     }
 
     /**
      * Cria uma nova conta
      *
      * @param  Request  $request
-     * @return Response
+     * @return ContaDTO
      */
     public function create(Request $request)
     {
@@ -39,8 +47,8 @@ class ContaController extends Controller
             $request->input('saldo')
         );
 
-        $conta = $this->contaService->createConta($ContaDTO);
+        $this->contaService->createConta($ContaDTO);
 
-        return new ContaResource($conta);
+        return $ContaDTO;
     }
 }
