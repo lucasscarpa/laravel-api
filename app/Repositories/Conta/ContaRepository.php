@@ -42,4 +42,13 @@ class ContaRepository implements IContaRepository
     {
         return $conta->delete();
     }
+
+    public function update(object $contaDTO)
+    {
+        $conta = $this->find($contaDTO->id);
+        $conta->saldo = $contaDTO->saldo;
+        $conta->save();
+
+        return $conta;
+    }
 }

@@ -29,10 +29,11 @@ class ContaController extends Controller
         if (!$conta) return response()->json(['message' => 'Conta não encontrada'], 404);
 
         $contaDTO = new ContaDTO(
-            $conta->saldo
+            $conta->saldo,
+            $conta->id
         );
 
-        return $contaDTO;
+        return response()->json(['conta' => $contaDTO]);
     }
 
     /**
@@ -43,12 +44,13 @@ class ContaController extends Controller
      */
     public function create(Request $request)
     {
-        $ContaDTO = new ContaDTO(
+        $contaDTO = new ContaDTO(
             $request->input('saldo')
         );
 
-        $this->contaService->createConta($ContaDTO);
+        $conta = $this->contaService->createConta($contaDTO);
+        $contaDTO->setId($conta->id);
 
-        return $ContaDTO;
+        return response()->json(['message' => 'Conta criada com sucesso', 'conta' => $contaDTO]);
     }
 }

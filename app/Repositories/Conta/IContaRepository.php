@@ -9,4 +9,5 @@ interface IContaRepository
     public function find(int $id);
     public function create(array $conta);
     public function delete(object $conta);
+    public function update(object $conta);
 }

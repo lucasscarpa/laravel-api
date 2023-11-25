@@ -23,15 +23,20 @@ class TransacaoDTO extends AbstractDTO implements InterfaceDTO
     public function rules(): array
     {
         return [
-            'valor'             => 'required',
-            'conta_id'          => 'required|exists:conta',
+            'valor'             => 'required|gt:0',
+            'conta_id'          => 'required|exists:App\Models\Conta,id',
             'forma_pagamento'   => 'required|in:P,D,C'
         ];
     }
 
     public function messages(): array
     {
-        return [];
+        return [
+            'conta_id.exists' => 'Conta informada é inválida',
+            'forma_pagamento.*' => 'Forma de pagamento informada é inválida',
+            '*.required' => 'É obrigatório informar um valor para o campo :attribute',
+            'valor.gt' => 'É obrigatório informar um valor positivo'
+        ];
     }
 
     public function validator(): Validator

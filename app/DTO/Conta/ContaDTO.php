@@ -10,9 +10,11 @@ class ContaDTO extends AbstractDTO implements InterfaceDTO
 {
     public float $saldo;
 
-    public function __construct(float $saldo)
+    public function __construct(float $saldo, ?int $id = 0)
     {
         $this->saldo = $saldo;
+        $this->id = $id;
+
         $this->validate();
     }
 
@@ -40,5 +42,15 @@ class ContaDTO extends AbstractDTO implements InterfaceDTO
     public function validate()
     {
         return $this->validator()->validate();
+    }
+
+    public function setId($id)
+    {
+        return $this->id = $id;
+    }
+
+    public function setSaldo($saldo)
+    {
+        return $this->saldo = $saldo;
     }
 }

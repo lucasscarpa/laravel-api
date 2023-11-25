@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Transacao\TransacaoService;
 use App\DTO\Transacao\TransacaoDTO;
+use App\DTO\Conta\ContaDTO;
 
 class TransacaoController extends Controller
 {
@@ -19,13 +20,14 @@ class TransacaoController extends Controller
     public function transacao(Request $request)
     {
         $TransacaoDTO = new TransacaoDTO(
-            $request->input('valor'),
-            $request->input('conta_id'),
-            $request->input('forma_pagamento')
+            $request->input('valor', 0),
+            $request->input('conta_id', 0),
+            $request->input('forma_pagamento', 'I')
         );
 
-        $response = $this->transacaoService->executa($TransacaoDTO);
-
-        return response($response);
+        $conta = $this->transacaoService->processaTransacao($TransacaoDTO);
+        
+        $contaDTO = new ContaDTO($conta->saldo, $conta->id);
+        return response()->json(['message' => 'Transação realizada com sucesso', 'conta' => $contaDTO]);
     }
 }
