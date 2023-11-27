@@ -12,7 +12,7 @@ class TransacaoTest extends TestCase
     use RefreshDatabase;
     
     /**
-     * A basic unit test example.
+     * Teste consultando conta existente
      *
      * @return void
      */
@@ -31,8 +31,14 @@ class TransacaoTest extends TestCase
         $this->assertArrayHasKey('id', $response['conta']);
     }
 
+    public function test_conta_inexistente()
+    {
+        $response = $this->get("/api/v1/conta?id=500");
+        $response->assertStatus(404);
+    }
+
     /**
-     * A basic unit test example.
+     * Teste de criação de conta.
      *
      * @return void
      */

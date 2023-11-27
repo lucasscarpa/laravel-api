@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DTO\Conta\ContaDTO;
 use App\Services\Conta\ContaService;
+use App\Http\Requests\ConsultaContaRequest;
 
 use App\Models\Conta;
 
@@ -24,7 +25,7 @@ class ContaController extends Controller
      * @param  Request  $request
      * @return ContaDTO
      */
-    public function index(Request $request)
+    public function index(ConsultaContaRequest $request)
     {
         $conta = $this->contaService->getContaById($request->input('id', 0));
 
