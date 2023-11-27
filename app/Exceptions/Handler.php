@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof ValidationException)
-          return response()->json(['message' => 'Dados de entrada inválidos', 'errors' => $exception->validator->getMessageBag()], 422); //type your error code.
+            return response()->json(['mensagem' => 'Dados de entrada inválidos', 'errors' => $exception->validator->getMessageBag()], 422); //type your error code.
 
         return parent::render($request, $exception);
     }
