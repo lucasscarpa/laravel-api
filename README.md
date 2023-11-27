@@ -14,3 +14,7 @@
 - Create file __database.sqlite__ inside app/database folder
 - Run __php artisan migrate --seed__
 - Run __php artisan serve__ (if you want to use other port add __--port=90__)
+
+## Endpoints
+
+- See __Objective.postman_collection.json__ with all available endpoints.

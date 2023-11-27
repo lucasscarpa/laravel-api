@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "68bc67c9-9311-4430-b329-285cef540f26",
+		"name": "Objective",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3328806",
+		"_collection_link": "https://red-resonance-505527.postman.co/workspace/Unimed-Santos~b9b2fbac-aaa1-4f9e-88e6-2779a14ca6fa/collection/3328806-68bc67c9-9311-4430-b329-285cef540f26?action=share&source=collection_link&creator=3328806"
+	},
+	"item": [
+		{
+			"name": "conta",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/conta?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"conta"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transacao",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "forma_pagamento",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "conta_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "valor",
+							"value": "18",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/transacao",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"transacao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "nova-conta",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"saldo\": \"500\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/conta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"conta"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
