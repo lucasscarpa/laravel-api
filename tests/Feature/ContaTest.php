@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class TransacaoTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /**
      * Teste consultando conta existente
      *
@@ -49,7 +49,7 @@ class TransacaoTest extends TestCase
         ])->assertOk()->json();
 
         $this->assertArrayHasKey('conta', $response);
-        $this->assertArrayHasKey('message', $response);
+        $this->assertArrayHasKey('mensagem', $response);
         $this->assertArrayHasKey('saldo', $response['conta']);
         $this->assertArrayHasKey('id', $response['conta']);
 
@@ -79,15 +79,15 @@ class TransacaoTest extends TestCase
         ])->assertOk()->json();
 
         $this->assertArrayHasKey('conta', $response);
-        $this->assertArrayHasKey('message', $response);
+        $this->assertArrayHasKey('mensagem', $response);
         $this->assertArrayHasKey('saldo', $response['conta']);
         $this->assertArrayHasKey('id', $response['conta']);
-        
+
         $this->assertDatabaseHas('transacao', [
             'valor' => (float) 10.0,
             'forma_pagamento' => 'P',
             'conta_id' => $conta->id,
-            'taxa'=> 0
+            'taxa' => 0
         ]);
     }
 }

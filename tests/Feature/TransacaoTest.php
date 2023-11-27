@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class TransacaoTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /**
      * Teste de uma transação via Débito
      *
@@ -31,7 +31,7 @@ class TransacaoTest extends TestCase
         ])->assertOk()->json();
 
         $this->assertArrayHasKey('conta', $response);
-        $this->assertArrayHasKey('message', $response);
+        $this->assertArrayHasKey('mensagem', $response);
         $this->assertArrayHasKey('saldo', $response['conta']);
         $this->assertArrayHasKey('id', $response['conta']);
 
@@ -39,7 +39,7 @@ class TransacaoTest extends TestCase
             'valor' => (float) 10.0,
             'forma_pagamento' => 'D',
             'conta_id' => $conta->id,
-            'taxa'=> 10 * 0.03
+            'taxa' => 10 * 0.03
         ]);
     }
 
@@ -63,7 +63,7 @@ class TransacaoTest extends TestCase
         ])->assertOk()->json();
 
         $this->assertArrayHasKey('conta', $response);
-        $this->assertArrayHasKey('message', $response);
+        $this->assertArrayHasKey('mensagem', $response);
         $this->assertArrayHasKey('saldo', $response['conta']);
         $this->assertArrayHasKey('id', $response['conta']);
 
@@ -71,7 +71,7 @@ class TransacaoTest extends TestCase
             'valor' => (float) 10.0,
             'forma_pagamento' => 'C',
             'conta_id' => $conta->id,
-            'taxa'=> 10 * 0.05
+            'taxa' => 10 * 0.05
         ]);
     }
 
@@ -95,15 +95,15 @@ class TransacaoTest extends TestCase
         ])->assertOk()->json();
 
         $this->assertArrayHasKey('conta', $response);
-        $this->assertArrayHasKey('message', $response);
+        $this->assertArrayHasKey('mensagem', $response);
         $this->assertArrayHasKey('saldo', $response['conta']);
         $this->assertArrayHasKey('id', $response['conta']);
-        
+
         $this->assertDatabaseHas('transacao', [
             'valor' => (float) 10.0,
             'forma_pagamento' => 'P',
             'conta_id' => $conta->id,
-            'taxa'=> 0
+            'taxa' => 0
         ]);
     }
 }

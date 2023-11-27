@@ -26,8 +26,8 @@ class TransacaoController extends Controller
         );
 
         $conta = $this->transacaoService->processaTransacao($TransacaoDTO);
-        
+
         $contaDTO = new ContaDTO($conta->saldo, $conta->id);
-        return response()->json(['message' => 'Transação realizada com sucesso', 'conta' => $contaDTO]);
+        return response()->json(['mensagem' => 'Transação realizada com sucesso', 'conta' => $contaDTO]);
     }
 }

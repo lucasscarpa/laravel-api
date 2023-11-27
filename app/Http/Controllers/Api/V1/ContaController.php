@@ -29,7 +29,7 @@ class ContaController extends Controller
     {
         $conta = $this->contaService->getContaById($request->input('id', 0));
 
-        if (!$conta) return response()->json(['message' => 'Conta não encontrada'], 404);
+        if (!$conta) return response()->json(['mensagem' => 'Conta não encontrada'], 404);
 
         $contaDTO = new ContaDTO(
             $conta->saldo,
@@ -54,6 +54,6 @@ class ContaController extends Controller
         $conta = $this->contaService->createConta($contaDTO);
         $contaDTO->setId($conta->id);
 
-        return response()->json(['message' => 'Conta criada com sucesso', 'conta' => $contaDTO]);
+        return response()->json(['mensagem' => 'Conta criada com sucesso', 'conta' => $contaDTO]);
     }
 }
