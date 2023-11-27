@@ -7,7 +7,7 @@ use App\DTO\Conta\ContaDTO;
 interface IContaRepository
 {
     public function find(int $id);
-    public function create(array $conta);
+    public function create(ContaDTO $conta);
     public function delete(object $conta);
-    public function update(object $conta);
+    public function update(ContaDTO $conta);
 }

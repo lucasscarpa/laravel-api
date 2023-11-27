@@ -6,15 +6,18 @@ use App\Services\Transacao\interfaces\Transacao;
 
 class TransacaoDebito implements Transacao
 {
-    protected $valor;
+    protected $transacaoDTO;
 
-    public function __construct($valor)
+    public function __construct($transacaoDTO)
     {
-        $this->valor = $valor;
+        $this->transacaoDTO = $transacaoDTO;
     }
 
     public function calcularTaxa()
     {
-        return $this->valor * 0.02;
+        $taxa = $this->transacaoDTO->valor * 0.03;
+        $this->transacaoDTO->setTaxa($taxa);
+
+        return $taxa;
     }
 }

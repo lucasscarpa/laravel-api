@@ -17,6 +17,7 @@ class CreateContaTable extends Migration
             $table->id();
             $table->float('saldo');
             $table->timestamps();
+            $table->softDeletes('deleted_at', 0);
         });
     }
 

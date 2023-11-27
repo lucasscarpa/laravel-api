@@ -22,9 +22,7 @@ class ContaService implements IContaService
 
     public function createConta(ContaDTO $contaDTO)
     {
-        return $this->contaRepository->create([
-            'saldo' => $contaDTO->saldo,
-        ]);
+        return $this->contaRepository->create($contaDTO);
     }
 
     public function deleteConta(int $id)

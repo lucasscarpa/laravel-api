@@ -8,11 +8,12 @@ use App\DTO\InterfaceDTO;
 
 class TransacaoDTO extends AbstractDTO implements InterfaceDTO
 {
-    public float $valor;
-    public int $conta_id;
-    public string $forma_pagamento;
+    public $valor;
+    public $conta_id;
+    public $forma_pagamento;
+    public $taxa;
 
-    public function __construct(float $valor, int $conta_id, string $forma_pagamento)
+    public function __construct($valor, $conta_id, $forma_pagamento)
     {
         $this->valor = $valor;
         $this->conta_id = $conta_id;
@@ -23,8 +24,8 @@ class TransacaoDTO extends AbstractDTO implements InterfaceDTO
     public function rules(): array
     {
         return [
-            'valor'             => 'required|gt:0',
-            'conta_id'          => 'required|exists:App\Models\Conta,id',
+            'valor'             => 'required|numeric|gt:0',
+            'conta_id'          => 'required|numeric|exists:App\Models\Conta,id',
             'forma_pagamento'   => 'required|in:P,D,C'
         ];
     }
@@ -32,10 +33,10 @@ class TransacaoDTO extends AbstractDTO implements InterfaceDTO
     public function messages(): array
     {
         return [
-            'conta_id.exists' => 'Conta informada é inválida',
+            'conta_id.*' => 'Conta informada é inválida',
             'forma_pagamento.*' => 'Forma de pagamento informada é inválida',
             '*.required' => 'É obrigatório informar um valor para o campo :attribute',
-            'valor.gt' => 'É obrigatório informar um valor positivo'
+            'valor.*' => 'É obrigatório informar um valor positivo',
         ];
     }
 
@@ -47,5 +48,10 @@ class TransacaoDTO extends AbstractDTO implements InterfaceDTO
     public function validate()
     {
         return $this->validator()->validate();
+    }
+
+    public function setTaxa($taxa)
+    {
+        $this->taxa = $taxa;
     }
 }

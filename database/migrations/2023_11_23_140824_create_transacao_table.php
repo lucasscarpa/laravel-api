@@ -17,8 +17,11 @@ class CreateTransacaoTable extends Migration
         Schema::create('transacao', function (Blueprint $table) {
             $table->id();
             $table->foreignId('conta_id')->constrained('conta');
+            $table->float('valor');
+            $table->float('taxa')->default(0);
             $table->string('forma_pagamento');
             $table->timestamps();
+            $table->softDeletes('deleted_at', 0);
         });
     }
 

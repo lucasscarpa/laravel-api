@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\DTO\Conta\ContaDTO;
 use App\Services\Conta\ContaService;
 
+use App\Models\Conta;
+
 class ContaController extends Controller
 {
     private $contaService;

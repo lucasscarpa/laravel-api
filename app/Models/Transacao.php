@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Conta extends Model
+class Transacao extends Model
 {
     use SoftDeletes;
-
+    
     protected $connection = 'sqlite';
 
     /**
@@ -16,7 +16,7 @@ class Conta extends Model
      *
      * @var string
      */
-    protected $table = 'conta';
+    protected $table = 'transacao';
 
     /**
      * The primary key associated with the table.
@@ -26,23 +26,28 @@ class Conta extends Model
     protected $primaryKey = 'id';
 
     /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-    */
-    public $timestamps = true;
-
-    /**
      * Indicates if the IDs are auto-incrementing.
      *
      * @var bool
-     */
+    */
     public $incrementing = true;
 
-    protected $fillable = ['saldo'];
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
 
-    public function transacao()
+    protected $fillable = [
+        'conta_id',
+        'valor',
+        'taxa',
+        'forma_pagamento'
+    ];
+
+    public function conta()
     {
-        return $this->hasMany(Transacao::class);
+        return $this->belongsTo(Conta::class);
     }
 }

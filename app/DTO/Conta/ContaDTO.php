@@ -8,9 +8,9 @@ use App\DTO\InterfaceDTO;
 
 class ContaDTO extends AbstractDTO implements InterfaceDTO
 {
-    public float $saldo;
+    public $saldo;
 
-    public function __construct(float $saldo, ?int $id = 0)
+    public function __construct($saldo, $id = 0)
     {
         $this->saldo = $saldo;
         $this->id = $id;
@@ -29,7 +29,7 @@ class ContaDTO extends AbstractDTO implements InterfaceDTO
     {
         return [
             '*required' => 'É obrigatório informar um valor para :attribute',
-            'saldo.gt' => 'É obrigatório informar um saldo positivo'
+            'saldo.*' => 'É obrigatório informar um valor positivo para o saldo'
 
         ];
     }

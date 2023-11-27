@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Conta\IContaRepository;
 use App\Repositories\Conta\ContaRepository;
+use App\Repositories\Transacao\TransacaoRepository;
+use App\Repositories\Transacao\ITransacaoRepository;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\Conta\IContaRepository',
             'App\Repositories\Conta\ContaRepository'
+        );
+
+        
+        $this->app->bind(
+            'App\Repositories\Transacao\ITransacaoRepository',
+            'App\Repositories\Transacao\TransacaoRepository'
         );
     }
 

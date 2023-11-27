@@ -3,18 +3,22 @@
 namespace App\Services\Transacao;
 
 use App\Services\Transacao\interfaces\Transacao;
+use App\DTO\Transacao\transacaoDTO;
 
 class TransacaoPix implements Transacao
 {
-    protected $valor;
+    protected $transacaoDTO;
 
-    public function __construct($valor)
+    public function __construct($transacaoDTO)
     {
-        $this->valor = $valor;
+        $this->transacaoDTO = $transacaoDTO;
     }
 
     public function calcularTaxa()
     {
-        return $this->valor;
+        $taxa = 0;
+        $this->transacaoDTO->setTaxa($taxa);
+
+        return $taxa;
     }
 }

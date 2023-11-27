@@ -3,6 +3,7 @@
 namespace App\Repositories\Conta;
 
 use App\Repositories\Conta\IContaRepository;
+use App\DTO\Conta\ContaDTO;
 use App\Models\Conta;
 
 class ContaRepository implements IContaRepository
@@ -21,7 +22,7 @@ class ContaRepository implements IContaRepository
      */
     public function find(int $id)
     {
-        return $this->model->where('id', $id)->first();
+        return $this->model->find($id);
     }
 
     /**
@@ -29,9 +30,9 @@ class ContaRepository implements IContaRepository
      * @param array $conta
      * @return object
      */
-    public function create(array $conta)
+    public function create(ContaDTO $contaDTO)
     {
-        return $this->model->create($conta);
+        return $this->model->create(['saldo' => $contaDTO->saldo]);
     }
 
     /**
@@ -43,7 +44,7 @@ class ContaRepository implements IContaRepository
         return $conta->delete();
     }
 
-    public function update(object $contaDTO)
+    public function update(ContaDTO $contaDTO)
     {
         $conta = $this->find($contaDTO->id);
         $conta->saldo = $contaDTO->saldo;
